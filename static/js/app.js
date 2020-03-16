@@ -3,7 +3,7 @@ function buildMetadata(sample) {
   metadata.html("")
   d3.json("/metadata/"+sample).then((data) => {
     Object.entries(data).forEach(([key,value]) => {
-      metadata.append("h6").text(`${key} : ${value}`)
+      metadata.append("p").text(`${key} : ${value}`)
     })
   })
 
@@ -14,10 +14,27 @@ function buildMetadata(sample) {
 
 function buildCharts(sample) {
 
-  // @TODO: Use `d3.json` to fetch the sample data for the plots
-
-    // @TODO: Build a Bubble Chart using the sample data
-
+//Bubble chart
+  d3.json("/samples/"+sample).then((sample_data) => {
+  let trace1 = {
+    x: sample_data.otu_ids,
+    y: sample_data.sample_values,
+    mode: 'markers',
+    text: sample_data.otu_labels,
+    marker: {
+      color: sample_data.otu_ids,
+      size: sample_data.sample_values,
+      colorscale: "Viridis"
+    }
+  };
+  let data = [trace1];
+  let layout = {
+    showlegend: false,
+    height: 600,
+    width: 1600
+  };
+  Plotly.newPlot("bubble", data, layout);
+})
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
