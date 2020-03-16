@@ -34,10 +34,23 @@ function buildCharts(sample) {
     width: 1600
   };
   Plotly.newPlot("bubble", data, layout);
+  //Pie Chart
+  // let sorted_data = sample_data.sort((a,b) => {
+  //   a[2]-b[2]
+  // })
+  data = [{
+    values: sample_data.sample_values.sort().slice(0,10),
+    labels: sample_data.otu_ids,
+    hovertext: sample_data.otu_labels,
+    type: "pie"
+  }];
+  layout = {
+    height: 600,
+    width: 600
+  };
+  Plotly.newPlot("pie", data, layout);
+
 })
-    // @TODO: Build a Pie Chart
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
 }
 
 function init() {
