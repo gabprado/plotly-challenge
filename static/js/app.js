@@ -35,11 +35,9 @@ function buildCharts(sample) {
   };
   Plotly.newPlot("bubble", data, layout);
   //Pie Chart
-  // let sorted_data = sample_data.sort((a,b) => {
-  //   a[2]-b[2]
-  // })
+  
   data = [{
-    values: sample_data.sample_values.sort().slice(0,10),
+    values: sample_data.sample_values.slice(0,10),
     labels: sample_data.otu_ids,
     hovertext: sample_data.otu_labels,
     type: "pie"
@@ -49,7 +47,7 @@ function buildCharts(sample) {
     width: 600
   };
   Plotly.newPlot("pie", data, layout);
-
+  console.log(sample_data)
 })
 }
 
