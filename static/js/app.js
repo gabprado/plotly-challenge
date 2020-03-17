@@ -6,8 +6,6 @@ function buildMetadata(sample) {
       metadata.append("p").text(`${key} : ${value}`)
     })
   })
-
-
     // BONUS: Build the Gauge Chart
     // buildGauge(data.WFREQ);
 }
@@ -31,23 +29,21 @@ function buildCharts(sample) {
   let layout = {
     showlegend: false,
     height: 600,
-    width: 1600
+    width: 1400
   };
   Plotly.newPlot("bubble", data, layout);
   //Pie Chart
-  
   data = [{
     values: sample_data.sample_values.slice(0,10),
-    labels: sample_data.otu_ids,
-    hovertext: sample_data.otu_labels,
+    labels: sample_data.otu_ids.slice(0,10),
+    hovertext: sample_data.otu_labels.slice(0,10),
     type: "pie"
   }];
   layout = {
     height: 600,
-    width: 600
+    width: 450
   };
   Plotly.newPlot("pie", data, layout);
-  console.log(sample_data)
 })
 }
 
